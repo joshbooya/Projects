@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>US Health Analysis</title>
+	<link rel="stylesheet" href="assets/css/style.css">
+	<!-- Latest compiled and minified CSS & JS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.3/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+</head>
+<body>
+	<div>
+		<div class="row">
+			<div class="jumbotron text-center col-xs-12 col-md-12 col-md-offset-0 col-lg-12">
+				<h1>US Health Analysis</h1>
+			</div>
+		</div>
+		<div >
+			<div class="container">
+				<div class="iframeContainer col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<!-- Students: Add a responsive iframe here that includes the d3.html file -->
+					<iframe src="d3.html" width="100%" height="700"></iframe> 
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="col-xs-12  col-md-12 col-lg-12" id= "charts">
+				<div>
+					<!-- Students: Replace with your analysis of the data -->
+					<br>
+					<h1>FINDINGS</h1>
+
+					<h3>Health Level</h3>
+					<h4><i>Food Stamps</i></h4>
+					<p>
+						There is a strong negative correlation (-0.69) between states' populations'
+						 dependency on food stamps (ON and OFF Food Stamps) and health level. 
+						A state that is more heavily dependent on entitlements as seen 
+						with Puerto Rico tend to have populations in poorer health. 
+						The inverse is also true, populations less dependent 
+						on stamps such as New Hampshire with 92.1% not reliant on food stamps 
+						have a much healthier population with 60% in positive health.
+					</p>
+					<h4><i>Education</i></h4>
+					<p>
+						There is a strong positive correlation (0.83) between a populations' education 
+						(high school diplomas and greater) and health level. 
+						A largely educated populace as seen with Minnessota has 92.6% with high school 
+						diplomas and greater has a much higher positive health level with 57.7%.
+						Similarly, the inverse is true, populations found largely without high school diplomas
+						as in Puerto Rico (26.1%) -- highest of any state -- have populations with the 
+						least in positive health (31%).
+					</p>
+
+					<h3>Medical Checkup Within Past 1 Year </h3>
+					<h4><i>Food Stamps</i></h4>
+					<p>
+						There is a weak negative correlation (-0.42) between states' populations'
+						 dependency on food stamps (ON & OFF Food Stamps) and past 1 year medical checkup. 
+						A state that is more heavily dependent on entitlements as seen 
+						with Puerto Rico, 38.7% on stamps, have a higher proportion of past 1 year checkups, 76.4%. 
+						The inverse is also true, populations less dependent 
+						on stamps such as Utah with 8.1% not reliant on food stamps 
+						have a much lower checkup rate 58%.
+					</p>
+					<h4><i>Education</i></h4>
+					<p>
+						There is a weak positive correlation (0.35) between a populations' education 
+						(high school diplomas and greater) and past 1 year medical checkup. 
+						A largely educated populace as seen with Utah has 91.4% with high school 
+						diplomas and greater has one of the lowest past 1 year medical check up rate of 58%. 
+						In contrast, populations with a lower education level as in Puerto Rico (73.9%) 
+						-- lowest of any state -- have populations with higher medical checkup rates, 76.4%.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div>
+		<!-- Insert your Copyright Info here -->
+		<h1>REFERENCES</h1>
+		<br>
+		<div class = "container" >
+			<ol>
+				<li>
+					<b>American FactFinder. </b><a href= "https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_14_1YR_S2201&prodType=table" target="_blank">FOOD STAMPS/SNAP - 2014 American Community Survey 1-Year Estimates.</a><i> United States Census Bureau,</i> Accessed 27 February 2018.
+				</li>
+				<li>
+					<b>American FactFinder. </b><a href= "https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_14_1YR_S1501&prodType=table">EDUCATIONAL ATTAINMENT - 2014 American Community Survey 1-Year Estimates.</a><i> United States Census Bureau,</i> Accessed 3 March 2018.
+				</li>
+				<li>
+					<b>Behavioral Risk Factors Surveillance System (BRFSS) Prevalance Data. </b><a href= "https://chronicdata.cdc.gov/Behavioral-Risk-Factors/Last-Checkup-2014/96vx-dnhx/data">"Last Checkup 2014 | Chronic Disease and Health Promotion Data & Indicators."</a><i> Centers for Disease Control and Prevention.</i> Accessed 3 March 2018.
+				</li>
+				<li>
+					<b>Behavioral Risk Factors Surveillance System (BRFSS) Prevalance Data. </b><a href= "https://chronicdata.cdc.gov/Behavioral-Risk-Factors/Overall-Health-2014/g66k-wd8p/data">"Overall Health 2014 | Chronic Disease and Health Promotion Data & Indicators."</a><i> Centers for Disease Control and Prevention.</i> Accessed 3 March 2018.
+				</li>
+			</ol>
+		</div>
+	</div>
+	<!-- <div><iframe width="500px" title="Last Checkup 2014" height="425px" src="https://chronicdata.cdc.gov/w/96vx-dnhx/x389-wqiw?cur=x0MtDCz5Z3n&from=root" frameborder="0"scrolling="no"><a href="https://chronicdata.cdc.gov/Behavioral-Risk-Factors/Last-Checkup-2014/96vx-dnhx" title="Last Checkup 2014" target="_blank">Last Checkup 2014</a></iframe><p><a href="http://www.socrata.com/" target="_blank">Powered by Socrata</a></p></div>-->
+</body>
+</html>

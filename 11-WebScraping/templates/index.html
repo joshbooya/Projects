@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+      
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12 col-md-offset-0">
+          <h1>Latest Mars News</h1>
+          <h3>{{ mars.news_title[0] }}</h3>
+          <p style="font-size:120%">{{ mars.news_p[0] }}</p>
+          <!-- <h3>{{ mars.news_title[1] }}</h3>
+          <p style="font-size:120%">{{ mars.news_p[1] }}</p>
+          <h3>{{ mars.news_title[2] }}</h3>
+          <p style="font-size:120%">{{ mars.news_p[2] }}</p>
+          <h3>{{ mars.news_title[3] }}</h3>
+          <p style="font-size:120%">{{ mars.news_p[3] }}</p>
+          <h3>{{ mars.news_title[4] }}</h3>
+          <p style="font-size:120%">{{ mars.news_p[4] }}</p>
+          <h3>{{ mars.news_title[5] }}</h3>
+          <p style="font-size:120%">{{ mars.news_p[5] }}</p>
+          <h3>{{ mars.news_title[6] }}</h3>
+          <p style="font-size:120%">{{ mars.news_p[6] }}</p>
+          <h3>{{ mars.news_title[7] }}</h3>
+          <p style="font-size:120%">{{ mars.news_p[7] }}</p>
+          <h3>{{ mars.news_title[8] }}</h3>
+          <p style="font-size:120%">{{ mars.news_p[8] }}</p>
+          <h3>{{ mars.news_title[9] }}</h3>
+          <p style="font-size:120%">{{ mars.news_p[9] }}</p>
+          <h3>{{ mars.news_title[10] }}</h3>
+          <p style="font-size:120%">{{ mars.news_p[10] }}</p>
+          <h3>{{ mars.news_title[11] }}</h3>
+          <p style="font-size:120%">{{ mars.news_p[11] }}</p>
+          <h3>{{ mars.news_title[12] }}</h3>
+          <p style="font-size:120%">{{ mars.news_p[12] }}</p>
+          <h3>{{ mars.news_title[13] }}</h3>
+          <p style="font-size:120%">{{ mars.news_p[13] }}</p>
+          <h3>{{ mars.news_title[14] }}</h3>
+          <p style="font-size:120%">{{ mars.news_p[14] }}</p> -->
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-8 col-md-offset-0">
+              <h1>Latest Mars Image</h1>  
+                <h3>{{ mars.current_image_date }}</h3>
+                  <img src= {{ mars.featured_image_url }} width= 100%;/>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+              <span class= "border">
+                <h2>Current Weather on Mars</h3>
+                <font size="4">{{ mars.mars_weather }}</font>
+              </span>
+            </div>
+          </div>
+
+          <div>
+              <h1>Mars Facts</h1>
+              <!-- {% for table in tables %} -->
+                <!-- <h2>{{titles[loop.index]}}</h2> -->
+                <!-- <div>
+                  <table class="table">{{mars.mars_html_table|safe}}</table>
+                </div> -->
+              <!-- {% endfor %} -->
+              <div>
+              {{mars.mars_html_table[0]}}
+              </div>  
+          </div>
+        </div>
+        <div class = "container">
+        {% for hemisphere in mars.hemisphere_image_urls %}
+        
+          <div class = "col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <h3>{{ hemisphere.title }}</h3>
+              <img src= {{ hemisphere.img_url }} width= 100%;/>
+          </div>
+        {% endfor %}
+        </div>
+
+      </div>
+    </div>  
+  </div>
+
+</body>
+</html>
+

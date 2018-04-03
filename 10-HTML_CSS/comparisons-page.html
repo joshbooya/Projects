@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+########################################################################################################
+
+* A [landing page](#landing-page) containing:
+  * An explanation of the project.
+  * Links to each visualizations page.
+
+########################################################################################################
+-->
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        
+        <!-- MOBILE OPTIMIZED FORMATTING -->
+        <!-- This code makes it mobile friendly - 01/29/2018 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- This disables zooming, meaning users are only able to scroll, and results in your site feeling a bit more like a native application. -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        
+        <!-- BOOTSTRAP CDN MINIFIED -->
+        <!-- Latest compiled and minified CSS - 01/29/2018 -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <!-- Optional theme - 01/29/2018 -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <!-- JS, Popper.js, and jQuery - 01/29/2018 -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <style type="text/css">
+            .img-rounded{
+                border-radius: 50px;
+            }
+            .post1 {
+                margin-left: 10px;
+            }
+            .post {
+                margin-bottom: 25px;
+            }
+            </style>
+        <title>Global Weather Analysis</title>
+    </head>
+
+    <body style="background-color: #d3d3d3;">
+        <nav class="row navbar navbar-default  ">
+            <!-- Use .container-fluid for a full width container, spanning the entire width of the viewport. -->
+            <div class="container-fluid ">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div>
+                    <form class="form-inline">
+                        <div>
+                            <button type="button" class="navbar-toggle collapsed navbar-right" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="true">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+
+                            <div class = "col-sm-8 col-md-8">
+                                <a class=" navbar-brand "  href="landing-page.html" style="background-color: #2abda7;color: white; font-family: Times New Roman"><strong>Home</strong></a>
+                            </div> 
+                        </div>
+                    </form>
+                    <div class = "col-xs-12 col-sm-4">
+                        <ul class= "nav navbar-nav navbar-right">
+                            <li class= "dropdown ">
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Plots<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="max-temp.html">Max Temperature</a></li>
+                                    <li><a href="humidity.html">Humidity</a></li>
+                                    <li><a href="cloudiness.html">Cloudiness</a></li>
+                                    <li><a href="wind-speed.html">Wind Speed</a></li>
+                                </ul>
+                            </li>
+
+                            <li><a href="comparisons-page.html">Comparison</a></li>
+
+                            <li><a href="data-page.html">Data</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+ 
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jumbotron jumbotron-fluid" style=" background-color: #ffffff;">
+                        <h1 style="color: #2abda7;font-family: Times New Roman"><strong>Comparison: Latitude vs X</strong></h1>
+                        <hr>
+                    <h4 class="post">Click any plot to get an in-depth analysis.</h4>
+                    <div class="row">
+                        <a href="max-temp.html">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 post">
+                                <h3 style="text-align: center; color: #2abda7;font-family: Times New Roman"><strong>vs. Max Temperature</strong></h3>
+                                <img src="output_data/Fig1.png" alt="Max Temp" class="img-thumbnail img-fluid" style="width:100%">
+                            </div>
+                        </a>
+                        <a href="humidity.html">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 post">
+                                <h3 style="text-align: center; color: #2abda7;font-family: Times New Roman"><strong>vs. Humidity</strong></h3>
+                                <img src="output_data/Fig2.png" alt="Humidity" class="img-thumbnail img-fluid" style="width:100%">
+                            </div>
+                        </a>
+                        <a href="cloudiness.html">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 post">
+                                <h3 style="text-align: center; color: #2abda7;font-family: Times New Roman"><strong>vs. Cloudiness</strong></h3>
+                                <img src="output_data/Fig3.png" alt="Cloudiness" class="img-thumbnail img-fluid" style="width:100%">
+                            </div>
+                        </a>
+                        <a href="wind-speed.html">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 post">
+                                <h3 style="text-align: center; color: #2abda7;font-family: Times New Roman"><strong>vs.Wind Speed</strong></h3>
+                                <img src="output_data/Fig4.png" alt="Wind Speed" class="img-thumbnail img-fluid" style="width:100%">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>            
+        </div>
+    </body>
+</html>

@@ -1,0 +1,37 @@
+/* Students:
+ * =========
+ * Add styling to your d3 chart with this file. */
+body {
+    font: 13px sans-serif;
+}
+
+.d3-tip {
+    line-height: 1.25;
+    font-weight: bold;
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    
+}
+
+.active {
+    font-weight: bold;
+    fill: #000;
+    fill: #551aaf;
+    transition: fill 0.3s ease-out;
+    text-anchor: middle;
+}
+  
+.inactive {
+    font-weight: lighter;
+    fill: #551aaf;
+    transition: fill 0.3s ease-out;
+    text-anchor: middle;
+}
+  
+.inactive:hover {
+    fill: #e75480;
+    cursor: pointer;
+}

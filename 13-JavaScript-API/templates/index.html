@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Belly Button Biodiversity Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+            text-align: left;
+        }
+    </style>
+    
+
+</head>
+<body onload = "optionList()">
+    <div class = "row container-fluid jumbotron text-center">
+        <h1 class="">
+            Belly Button Biodiversity Dashboard
+        </h1>
+        <p>Use the interactive charts below to explore the dataset</p>
+    </div>
+    <!-- <script src="index.js" type="text/javascript"></script> -->
+    <script>
+        // text labels for Pie Chart
+        
+        var otu_description = new Array();
+        var default_url;
+        var text_url = `/otu`;
+        var labels = new Array();
+        var values = new Array();
+        var radii = new Array();
+        var colors = new Array();
+        var x_bble = new Array();
+        var y_bble = new Array();
+
+        ///////////////////////////////////////////////////////
+        // Plots the default route once the page loads
+        ///////////////////////////////////////////////////////
+        
+        default_url = `/samples/BB_940`;
+        d3.json(default_url, function(error, data) {
+            if (error) return console.warn(error);
+
+            for (var i = 0; i < 10; i++) {
+
+                labels[i] = data[0].otu_ids[i];
+                values[i] = data[0].sample_values[i];
+            }
+            
+            console.log("default otu_ids data", labels);
+            console.log("default sample_values data", values);
+            
+            var txt_pie = new Array();
+            //Create list of descriptions to populate text                        
+            d3.json(text_url, function(error, data) {
+
+                if (error) return console.warn(error);
+                otu_description = data;
+
+                console.log("descriptions:", otu_description);
+                
+                for (var i = 0; i < labels.length; i++) {
+                    var j = labels[i];
+                    txt_pie[i] = otu_description[j];
+                }
+            })
+            
+            console.log("default text labels" , txt_pie);
+            
+            // Pie Chart
+            var data_pie = [{
+                labels: labels,
+                values: values,
+                text: txt_pie,
+                type: 'pie'
+            }];
+
+            var layout = {
+                // autosize: true,
+                width:600,
+                height:600
+            };
+            Plotly.newPlot('sample_pie_chart', data_pie, layout);
+        })
+
+        d3.json(default_url, function(error, data) {
+            if (error) return console.warn(error);
+
+            for (var i = 0; i < data[0].otu_ids.length; i++) {
+
+                x_bble[i] = data[0].otu_ids[i];
+                y_bble[i] = data[0].sample_values[i];
+                radii[i] = data[0].sample_values[i];
+                colors[i] = `rgb(${x_bble[i] /100},${x_bble[i]/10},${x_bble[i]/1000})`;
+            }
+
+            // Check Points
+            console.log("default data.length:", data[0].otu_ids.length);
+            console.log("default x_bble:", x_bble);
+            console.log("default y_bble:", y_bble);
+            console.log("default radii:", radii);
+            console.log("default colors:", colors);
+            
+            var txt_bble = new Array();
+            //Create list of descriptions to populate text                        
+            d3.json(text_url, function(error, data) {
+
+                if (error) return console.warn(error);
+                otu_description = data;
+
+                console.log("descriptions:", otu_description);
+                
+                for (var i = 0; i < x_bble.length; i++) {
+                    var j = x_bble[i];
+                    txt_bble[i] = otu_description[j];
+                }
+            })
+            
+            console.log("default text labels", txt_bble);
+            // Bubble Chart
+            var trace = {
+                x: x_bble,
+                y: y_bble,
+                mode: "markers",
+                text: txt_bble,
+                marker: {
+                    size: radii,
+                    color: colors
+                },
+            };
+            var data_bubble = [trace];
+
+            var layout_bubble = {
+                // title: "Randomly Generated Data",
+                showlegend: false,
+                // autosize: true,
+                height: 600,
+                width: 800
+            };
+
+            Plotly.newPlot ('sample_bubble_chart', data_bubble, layout_bubble);
+        })
+
+        ///////////////////////////////////////////////////////
+        // Creates Metadata Table
+        ///////////////////////////////////////////////////////s
+
+        
+        default_url = `/metadata/BB_940`;
+
+
+        d3.json(default_url, function(error, data) {
+            if (error) return console.warn(error);
+
+            console.log( "results", typeof data.AGE);
+            document.getElementById("sampleBB").innerHTML = "BB_940 Metadata";
+            document.getElementById("sample_metadata").querySelector("#AGE").innerHTML = data.AGE;
+            document.getElementById("sample_metadata").querySelector("#BBTYPE").innerHTML = data.BBTYPE;
+            document.getElementById("sample_metadata").querySelector("#ETHNICITY").innerHTML = data.ETHNICITY;
+            document.getElementById("sample_metadata").querySelector("#GENDER").innerHTML = data.GENDER;
+            document.getElementById("sample_metadata").querySelector("#LOCATION").innerHTML = data.LOCATION;
+            document.getElementById("sample_metadata").querySelector("#SAMPLEID").innerHTML = data.SAMPLEID;
+        })
+        ///////////////////////////////////////////////////////
+        // Creates options for the drown down list
+        ///////////////////////////////////////////////////////
+
+        function optionList() {
+            var $dataList = document.getElementById("selDataset");
+            queryURL = "/names";
+
+            d3.json(queryURL, function(error, response) {
+                // Handle errors
+                if (error) return console.warn(error);
+                
+                var results = response;
+                console.log( "results", results);
+
+                var option;
+                for (var i = 0; i < results.length; i++) {
+                    option = document.createElement("option");
+                    option.value = results[i];
+                    option.text = results[i];
+                    $dataList.append(option);
+                }
+            });
+        }
+        ///////////////////////////////////////////////////////
+        // Update Pie & Bubble Chart w/ Newly Selected Sample
+        ///////////////////////////////////////////////////////
+
+        function updatePlotly(data) {
+
+            for (var i = 0; i < 10; i++) {
+                labels[i] = data[0].otu_ids[i];
+                values[i] = data[0].sample_values[i];
+            }
+
+            console.log("new otu_ids data", labels);
+            console.log("new sample_values data", values);
+            
+            var txt = new Array();
+            //Create list of descriptions to populate text                        
+            d3.json(text_url, function(error, data) {
+
+                if (error) return console.warn(error);
+                otu_description = data;
+
+                console.log("descriptions:", otu_description);
+                
+                for (var i = 0; i < labels.length; i++) {
+                    var j = labels[i];
+                    txt[i] = otu_description[j];
+                }
+            })
+
+            console.log("new text labels" , txt);
+            
+            Plotly.restyle('sample_pie_chart', 'labels',[labels]);
+            Plotly.restyle('sample_pie_chart', 'values',[values]);
+            Plotly.restyle('sample_pie_chart', 'text',[txt]);   
+            
+            for (var i = 0; i < data[0].otu_ids.length; i++) {
+                x_bble[i] = data[0].otu_ids[i];
+                y_bble[i] = data[0].sample_values[i];
+                radii[i] = data[0].sample_values[i];
+                colors[i] = `rgb(${x_bble[i] * 100},${x_bble[i]/10},${x_bble[i]/1000})`;
+            }
+            
+            var txt_bble = new Array();
+
+            d3.json(text_url, function(error, data) {
+                if (error) return console.warn(error);
+                otu_description = data;
+
+                console.log("descriptions_bubble:", otu_description);
+
+                for (var i = 0; i < x_bble.length; i++) {
+                    var j = x_bble[i];
+                    txt_bble[i] = otu_description[j];
+                }
+            })
+
+            console.log("new text labels", txt_bble);
+            // Bubble Chart
+            
+            Plotly.restyle('sample_bubble_chart', 'x', [x_bble]);
+            Plotly.restyle('sample_bubble_chart', 'y', [y_bble]);
+
+            // Plotly.restyle ('sample_bubble_chart', 'text', txt_bble);
+            Plotly.restyle ('sample_bubble_chart', 'marker.size', [radii]);
+            Plotly.restyle ('sample_bubble_chart', 'marker.color', [colors]);
+            
+            ///////////////////////////////////////////////////////
+            // Get new data whenever the dropdown selection changes
+            ///////////////////////////////////////////////////////
+
+            default_url = `/metadata/`+rt;
+            d3.json(default_url, function(error, data) {
+                if (error) return console.warn(error);
+
+                console.log( "results", typeof data.AGE);
+                document.getElementById("sampleBB").innerHTML = rt + " Metadata";
+                document.getElementById("sample_metadata").querySelector("#AGE").innerHTML = data.AGE;
+                document.getElementById("sample_metadata").querySelector("#BBTYPE").innerHTML = data.BBTYPE;
+                document.getElementById("sample_metadata").querySelector("#ETHNICITY").innerHTML = data.ETHNICITY;
+                document.getElementById("sample_metadata").querySelector("#GENDER").innerHTML = data.GENDER;
+                document.getElementById("sample_metadata").querySelector("#LOCATION").innerHTML = data.LOCATION;
+                document.getElementById("sample_metadata").querySelector("#SAMPLEID").innerHTML = data.SAMPLEID;
+            })
+
+        }
+        ///////////////////////////////////////////////////////
+        // Get new data whenever the dropdown selection changes
+        ///////////////////////////////////////////////////////
+        var rt;
+        function optionChanged(route) {
+            console.log("route:", route);
+            rt = `${route}`;
+            queryURL = `/samples/${route}`;
+            d3.json(queryURL, function(error, data) {
+                
+                if (error) return console.warn(error);
+                console.log("newdata", data);
+
+                updatePlotly(data);
+            });
+        }
+    </script>
+
+    <div class="row">
+        <div align="center" class = "jumbotron col-xs-12 col-sm-2 col-md-2 col-lg-2" >
+            <div class="">
+                <h4>SELECT Sample:</h4>
+                <select id="selDataset" onchange="optionChanged(this.value)"></select>
+            </div>
+        </div>
+        <div class="container col-xs-9 col-sm-10 col-md-10 col-lg-4">
+            <div id="sample_pie_chart" class=""></div>
+        </div>
+        <div class="container col-xs-12 col-sm-12 col-md-12 col-lg-6">
+            <div id="sample_bubble_chart"></div>
+        </div>
+    </div>
+    <div class="container col-xs-3 col-sm-3 col-md-3 col-lg-2">
+            <div id="sample_metadata">
+                <h2 id = "sampleBB"></h2>
+                <table class = "">
+                    <tr>
+                        <th>Age:</th>
+                        <td id= "AGE"></td>
+                    </tr>
+                    <tr>
+                        <th>BBType:</th>
+                        <td id= "BBTYPE"></td>
+                    </tr>
+                    <tr>
+                        <th>Ethnicity:</th>
+                        <td id= "ETHNICITY"></td>
+                    </tr>
+                    <tr>
+                        <th>Gender:</th>
+                        <td id= "GENDER"></td>
+                    </tr>
+                    <tr>
+                        <th>Location:</th>
+                        <td id= "LOCATION"></td>
+                    </tr>
+                    <tr>
+                        <th>Sample ID:</th>
+                        <td id= "SAMPLEID"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+</body>
+</html>
